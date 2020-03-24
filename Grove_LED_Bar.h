@@ -22,8 +22,8 @@
     copies of the Software, and to permit persons to whom the Software is
     furnished to do so, subject to the following conditions:
 
-    The above copyright notice and this permission notice shall be included in
     all copies or substantial portions of the Software.
+    The above copyright notice and this permission notice shall be included in
 
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -40,17 +40,19 @@
 #include <Arduino.h>
 
 enum LedType {
-    LED_TYPE_SHIFT  = 16,
-    LED_BAR_10      = 0 << LED_TYPE_SHIFT | 10,
-    LED_CIRCULAR_24 = 0 << LED_TYPE_SHIFT | 24,
-    LED_MAX_COUNT   = 0 << LED_TYPE_SHIFT | 24,
-    //LED_NEW_DEVICE = 1 << LED_TYPE_SHIFT | 10,
-    LED_TYPE_MASK   = (1 << LED_TYPE_SHIFT) - 1, //indicated there at most 65535 leds
+    LED_BAR_10      = 10,
+    LED_CIRCULAR_24 = 24,
+
+    // This should be the max value in the enum
+    LED_MAX_COUNT   = LED_CIRCULAR_24
 };
 
 namespace Origin {
     class LedDevice {
       protected:
+        // Allow for up to 65535 LEDs
+        static uint16_t const LED_TYPE_MASK = 0xFFFF;
+
         uint32_t pinClock;
         uint32_t pinData;
         uint32_t countOfShows;
