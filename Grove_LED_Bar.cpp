@@ -56,9 +56,11 @@ namespace Origin {
         pinMode(pinClock, OUTPUT);
         pinMode(pinData, OUTPUT);
     }
+
     uint32_t LedDevice::countOfLed() {
         return (uint32_t)type & LED_TYPE_MASK;
     }
+
     void LedDevice::send(uint16_t bits) {
         for (uint32_t i = 0, clk = 0; i < 16; i++) {
             digitalWrite(pinData, bits & 0x8000 ? HIGH : LOW);
@@ -67,6 +69,7 @@ namespace Origin {
             bits <<= 1;
         }
     }
+
     void LedDevice::send() {
         if (reverseShow) {
             if (LED_BAR_10 != type) {
@@ -112,6 +115,7 @@ namespace Origin {
         }
         latch();
     }
+
     void LedDevice::latch() {
         digitalWrite(pinData, LOW);
         digitalWrite(pinClock, HIGH); digitalWrite(pinClock, LOW);
@@ -126,6 +130,7 @@ namespace Origin {
         digitalWrite(pinClock, LOW);
     }
 }
+
 void Grove_LED_Bar::setGreenToRed(bool greenToRed) {
     reverseShow = greenToRed;
     send();
@@ -167,6 +172,7 @@ void Grove_LED_Bar::toggleLed(uint32_t ledNo) {
     led[i] = led[i] ? LED_TURN_OFF : LED_FULL_BRIGHTNESS;
     send();
 }
+
 void Grove_LED_Bar::setBits(uint32_t value) {
     for (uint32_t i = 0; i < countOfLed(); i++, value >>= 1) {
         led[i] = value & 1 ? LED_FULL_BRIGHTNESS : LED_TURN_OFF;
@@ -174,6 +180,7 @@ void Grove_LED_Bar::setBits(uint32_t value) {
 
     send();
 }
+
 void Grove_LED_Bar::setLedNum(uint32_t count) {
     countOfShows = count;
 
@@ -181,6 +188,7 @@ void Grove_LED_Bar::setLedNum(uint32_t count) {
         led[i] = LED_TURN_OFF;
     }
 }
+
 uint32_t Grove_LED_Bar::getBits() {
     uint32_t value = 0;
     for (uint32_t i = 0; i < countOfShows; i++) {
