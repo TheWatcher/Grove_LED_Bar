@@ -78,6 +78,7 @@ class Grove_LED_Bar : Origin::LedDevice {
     void setGreenToRed(bool greenToRed);
     void setLevel(float level);
     void setLed(uint32_t ledNo, float brightness);
+    void setLeds(uint8_t *leds);
     void toggleLed(uint32_t ledNo);
     void setBits(uint32_t value);
     void setLedNum(uint32_t count);

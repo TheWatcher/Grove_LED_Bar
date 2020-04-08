@@ -181,6 +181,14 @@ void Grove_LED_Bar::setBits(uint32_t value) {
     send();
 }
 
+void Grove_LED_Bar::setLeds(uint8_t *leds) {
+	for (uint32_t i = 0; i < countOfLed(); i++) {
+		led[i] = leds[i];
+	}
+
+	send();
+}
+
 void Grove_LED_Bar::setLedNum(uint32_t count) {
     countOfShows = count;
 
